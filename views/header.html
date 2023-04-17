@@ -15,11 +15,13 @@
     <div class="uk-navbar-right">
       <ul class="uk-navbar-nav">
         <li>
-          <a href="#"><span class="uk-icon uk-margin-small-right" uk-icon="icon: user"></span>dae</a>
+          <a href="#"><span class="uk-icon uk-margin-small-right" uk-icon="icon: user"></span><%= username %></a>
         </li>
         <li>
-          <a href="#">
-            <button type="button" class="uk-button uk-button-default"><span class="uk-icon" uk-icon="icon: sign-out"></span>退出</button>
+          <a href="/dove-eee/logout">
+            <button type="button" id="logout" class="uk-button uk-button-default">
+              <span class="uk-icon" uk-icon="icon: sign-out"></span>退出登录
+            </button>
           </a>
         </li>
       </ul>

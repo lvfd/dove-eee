@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('head.html') -%>
+  <title>新小作文</title>
+  <script src="/dove-eee/libs/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="/dove-eee/release/new.js"></script>
+</head>
+<body>
+  <header>
+    <div class="uk-background-muted">
+      <nav class="uk-navbar-container uk-container" uk-navbar>
+        <div class="uk-navbar-left">
+          <ul class="uk-navbar-nav">
+            <li class="uk-active">
+              <a href="/dove-eee/main">
+                <button class="uk-button uk-button-default">
+                  <span class="uk-icon uk-margin-small-right" uk-icon="icon: chevron-double-left"></span>返回主菜单
+                </button>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="uk-navbar-center">
+          <a class="uk-logo" href="#">
+            <span class="uk-icon uk-margin-small-right" uk-icon="icon: happy"></span>新文章
+          </a>
+        </div>
+        <div class="uk-navbar-right">
+          <ul class="uk-navbar-nav">
+            <li>
+              <a href="#"><span class="uk-icon uk-margin-small-right" uk-icon="icon: user"></span><%= username %></a>
+            </li>
+            <li>
+              <a href="/dove-eee/logout">
+                <button type="button" id="logout" class="uk-button uk-button-default">
+                  <span class="uk-icon" uk-icon="icon: sign-out"></span>退出登录
+                </button>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="uk-container">
+      <form>
+        <fieldset class="uk-fieldset">
+          <div class="uk-margin uk-margin-top">
+            <label class="uk-form-label">标题</label>
+            <input type="text" name="title" class="uk-input">
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label">作者</label>
+            <input type="text" name="author" class="uk-input">
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label">内容</label>
+            <textarea class="uk-textarea" id="content"></textarea>
+          </div>
+          <button type="button" class="uk-button uk-button-primary uk-width-medium uk-align-center">提交</button>
+        </fieldset>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <div class="uk-section uk-section-secondary uk-section-xsmall uk-text-center">
+      <span>lvfd@acca.com.cn</span>
+    </div>
+  </footer>
+</body>
+</html>

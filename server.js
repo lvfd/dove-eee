@@ -1,9 +1,13 @@
+const { dataServer, redisCluster } = require('./project.config')
 const path = require('path')
 const express = require('express')
 const ejs = require('ejs')
 const multer = require('multer')
 const session = require('express-session')
+const Redis = require('ioredis')
+const RedisStore = require('connect-redis').default
 const bodyParser = require('body-parser')
+const axios = require('axios')
 const app = express()
 const port = 3000
 const env = process.env.NODE_ENV? process.env.NODE_ENV: 'production'
@@ -37,29 +41,82 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   rolling: true,
-  cookie: {}
+  cookie: {
+    maxAge: 1000 * 60 * 60/*min*/
+  },
+  store: new RedisStore({
+    prefix: 'SESS:',
+    client: new Redis.Cluster(redisCluster.rootNodes, {
+      redisOptions: {
+        password: redisCluster.password
+      },
+      keyPrefix: "DOVE-EEE:",
+      clusterRetryStrategy: () => {
+        return
+      },
+      enableReadyCheck: true
+    })
+  })
 }))
+
+function isAuthenticated (req, res, next) {
+  if (req.session.username) next()
+  else res.redirect(`/${appname}`)
+}
 
 /* Login Page: */
 app.get(`/${appname}`, (req, res) => res.render('login'))
 
 /* Login Post: */
-app.post(`/${appname}/login`, bodyParser.urlencoded({ extended: false }), (req, res) => {
-  const loginInfo = req.body
-  const session = req.session
-  for ( var p in loginInfo ) {
-    session[p] = loginInfo[p]
-  }
-  res.redirect(`/${appname}/main`)
+app.post(`/${appname}/login`, bodyParser.json(), (req, res, next) => {
+  const username = req.body.username
+  const password = req.body.password
+  axios.post(`${dataServer}/dove-eee-data/checkPassword`, {
+    username: username,
+    password: password
+  })
+  .then(response => {
+    if (response.data === true) {
+      return req.session.regenerate(err => {
+        if (err) next(err)
+        req.session.username = username
+        req.session.save(err => {
+          if (err) return next(err)
+          res.status(201).json({ msg: '验证通过' })
+        })
+      })
+    }
+    return res.status(403).json({ msg: '密码错误' })
+  })
+  .catch(error => res.status(500).json({ 
+    msg: '数据服务器连接错误',
+    errorMsg: error
+  }))
+})
+
+/* Logout: */
+app.get(`/${appname}/logout`, (req, res, next) => {
+  req.session.username = null
+  req.session.save(err => {
+    if (err) next(err)
+    req.session.regenerate(err => {
+      if (err) next(err)
+      res.redirect(`/${appname}`)
+    })
+  })
 })
 
 /* Main Page: */
-app.get(`/${appname}/main`, (req, res) => {
-  // res.render('main')
-  res.send(req.session)
+app.get(`/${appname}/main`, isAuthenticated, (req, res) => {
+  res.render('main', { username: req.session.username })
 })
 
-app.get(`/${appname}/edit`, (req, res) => res.render('edit'))
+/* New article Page: */
+app.get(`/${appname}/main/new`, isAuthenticated, (req, res) => {
+  res.render('new', { username: req.session.username })
+})
+
+app.get(`/${appname}/edit`, isAuthenticated, (req, res) => res.render('edit'))
 
 app.post(`/${appname}/images/upload`, upload.single('file'), (req, res) => {
   const image = req.file

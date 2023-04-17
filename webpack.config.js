@@ -9,7 +9,8 @@ module.exports = {
   entry: {
     login: './src/login.js',
     main: './src/main.js',
-    edit: './src/edit.js'
+    edit: './src/edit.js',
+    new: './src/new.js'
   },
   output: {
     // clean: true,
@@ -23,6 +24,9 @@ module.exports = {
   //     },{
   //       from: path.resolve(__dirname, 'src/langs'),
   //       to: path.resolve(__dirname, 'libs/tinymce/langs')
+  //     },{
+  //       from: path.resolve(__dirname, 'src/favicon.ico'),
+  //       to: path.resolve(__dirname, 'libs/favicon.ico')
   //     },{
   //       from: path.resolve(__dirname, 'node_modules/uikit/dist/css'),
   //       to: path.resolve(__dirname, 'libs/uikit/css')

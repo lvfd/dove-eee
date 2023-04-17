@@ -1,21 +1,19 @@
 import UIkit from 'uikit'
 import Icons from 'uikit/dist/js/uikit-icons'
 import axios from 'axios'
+import { dataServer } from '../project.config'
 
 UIkit.use(Icons)
 const dangerClass = 'uk-form-danger'
 const successClass = 'uk-form-success'
-const dataServer = 'http://localhost:8080'
 window.addEventListener('DOMContentLoaded', () => {
-  const inputForUserName = document.querySelector('#username')
   const inputsForSubmit = document.querySelectorAll('.uk-card-body input')
   const buttonForLogin = document.querySelector('#loginBtn')
-  inputForUserName.addEventListener('blur', checkUserName)
   inputsForSubmit.forEach(input => input.addEventListener('focus', e => e.target.classList.remove(successClass, dangerClass)))
   buttonForLogin.addEventListener('click', loginFunction)
 })
 function checkUserName(event) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const input = event? event.target: document.querySelector('#username')
     const userName = input.value.trim()
     if (!userName) {
@@ -34,10 +32,9 @@ function checkUserName(event) {
       return resolve(false)
     })
     .catch(error => {
-      console.error(error)
-      input.classList.add(dangerClass)
-      UIkit.modal.alert(error)
-      return reject()
+      console.error('==>Error@checkUserName: ', error)
+      if (error.message) UIkit.modal.alert(error.message)
+      return resolve(false)
     })
   })
 }
@@ -49,17 +46,22 @@ async function loginFunction() {
     username: document.querySelector('#username').value.trim(),
     password: passwordInput.value.trim()
   }
-  axios.post(`${dataServer}/dove-eee-data/checkPassword`, postData)
+  axios.post('/dove-eee/login', postData)
   .then(response => {
-    if (response.data === true) {
+    if (response.status === 201) {
       passwordInput.classList.add(successClass)
-      return document.querySelector('#loginForm').submit()
+      UIkit.notification({
+        message: response.data.msg,
+        status: 'success',
+        timeout: 500
+      })
+      UIkit.util.on('.uk-notification', 'close', () => window.location.replace('/dove-eee/main'))
     }
-    passwordInput.classList.add(dangerClass)
-    UIkit.modal.alert('密码错误')
   })
   .catch(error => {
-    console.error(error)
-    UIkit.modal.alert(error)
+    if (error.response) {
+      passwordInput.classList.add(dangerClass)
+      UIkit.modal.alert(error.response.data.msg)
+    }
   })
 }

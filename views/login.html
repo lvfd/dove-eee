@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="origin">
-  <title>德文修</title>
-  <link rel="stylesheet" href="/dove-eee/libs/uikit/css/uikit.min.css">
+  <%- include('head.html') -%>
+  <title>德文修登录页</title>
   <script src="/dove-eee/release/login.js"></script>
 </head>
 <body>
   <main class="uk-background-muted">
     <div class="uk-position-center">
-      <form id="loginForm" method="post" action="/dove-eee/login">
+      <form>
         <fieldset class="uk-fieldset">
           <div class="uk-card uk-card-default uk-card-hover">
             <div class="uk-card-header">
@@ -20,11 +17,11 @@
             <div class="uk-card-body">
               <div class="uk-margin">
                 <label class="uk-form-label" for="username">用户名</label>
-                <input class="uk-input" type="text" id="username" name="username" placeholder="请输入用户名">
+                <input class="uk-input" type="text" id="username" name="username" placeholder="请输入用户名" autocomplete="on">
               </div>
               <div class="uk-margin">
                 <label class="uk-form-label" for="password">密码</label>
-                <input class="uk-input" type="password" id="password" name="password" placeholder="请输入密码">
+                <input class="uk-input" type="password" id="password" name="password" placeholder="请输入密码" autocomplete="off">
               </div>
             </div>
             <div class="uk-card-footer">
