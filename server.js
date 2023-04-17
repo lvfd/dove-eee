@@ -7,6 +7,7 @@ const session = require('express-session')
 const Redis = require('ioredis')
 const RedisStore = require('connect-redis').default
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const axios = require('axios')
 const app = express()
 const port = 3000
@@ -35,6 +36,7 @@ app.use(`/${appname}/libs`, express.static(path.resolve(dirname, 'libs')))
 app.use(`/${appname}/release`, express.static(path.resolve(dirname, 'release')))
 app.use(`/${appname}/uploads`, express.static(path.resolve(dirname, 'uploads')))
 
+app.use(cookieParser())
 app.use(session({
   name: 'dove.eee.uid',
   secret: 'goose',
@@ -45,15 +47,13 @@ app.use(session({
     maxAge: 1000 * 60 * 60/*min*/
   },
   store: new RedisStore({
-    prefix: 'SESS:',
+    prefix: 'DOVEPAY:DOVE_EEE:USER:',
     client: new Redis.Cluster(redisCluster.rootNodes, {
       redisOptions: {
         password: redisCluster.password
       },
-      keyPrefix: "DOVE-EEE:",
-      clusterRetryStrategy: () => {
-        return
-      },
+      // keyPrefix: "DOVEPAY:",
+      clusterRetryStrategy: (times) => Math.min(times * 50, 2000),
       enableReadyCheck: true
     })
   })
@@ -108,6 +108,8 @@ app.get(`/${appname}/logout`, (req, res, next) => {
 
 /* Main Page: */
 app.get(`/${appname}/main`, isAuthenticated, (req, res) => {
+  // res.send(req.session)
+  console.log(req.cookies)
   res.render('main', { username: req.session.username })
 })
 
