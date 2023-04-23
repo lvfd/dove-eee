@@ -44,7 +44,8 @@ app.use(session({
   saveUninitialized: false,
   rolling: true,
   cookie: {
-    maxAge: 1000 * 60 * 60/*min*/
+    maxAge: 1000 * 60 * 60/*min*/,
+    httpOnly: false
   },
   store: new RedisStore({
     prefix: 'DOVEPAY:DOVE_EEE:USER:',
@@ -108,8 +109,6 @@ app.get(`/${appname}/logout`, (req, res, next) => {
 
 /* Main Page: */
 app.get(`/${appname}/main`, isAuthenticated, (req, res) => {
-  // res.send(req.session)
-  console.log(req.cookies)
   res.render('main', { username: req.session.username })
 })
 

@@ -1,0 +1,145 @@
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+127.0.0.1       lyu.dp.com
+#	::1             localhost
+
+
+# adobe
+0.0.0.0 activate.adobe.com
+0.0.0.0 practivate.adobe.com
+0.0.0.0 ereg.adobe.com
+0.0.0.0 activate.wip3.adobe.com
+0.0.0.0 wip3.adobe.com
+0.0.0.0 3dns-3.adobe.com
+0.0.0.0 3dns-2.adobe.com
+0.0.0.0 adobe-dns.adobe.com
+0.0.0.0 adobe-dns-2.adobe.com
+0.0.0.0 adobe-dns-3.adobe.com
+0.0.0.0 ereg.wip3.adobe.com
+0.0.0.0 activate-sea.adobe.com
+0.0.0.0 wwis-dubc1-vip60.adobe.com
+0.0.0.0 activate-sjc0.adobe.com
+
+# dovepay
+#108.0.100.51  www.dovepay.com
+10.1.30.49 www.dovepay.com
+108.0.100.60 test.dovepay.com
+
+# OCP
+10.1.82.220 registry.ocp.dovepay
+10.1.82.205 registry.ocp.epay
+10.1.82.201 registry1.ocp.epay
+10.1.82.202 registry2.ocp.epay
+
+10.1.18.233 registry.acca.com.cn
+
+10.1.18.236 registry.ocp.acca
+10.1.18.236 clair.ocp.acca 
+10.1.18.236 default-route-openshift-image-registry.apps.ocp.acca
+
+10.1.18.237 console-openshift-console.apps.ocp.acca
+10.1.18.237 oauth-openshift.apps.ocp.acca
+10.1.18.237 grafana-openshift-monitoring.apps.ocp.acca
+10.1.18.237 alertmanager-main-openshift-monitoring.apps.ocp.acca
+10.1.18.237 prometheus-k8s-openshift-monitoring.apps.ocp.acca
+10.1.18.237 kibana-openshift-logging.apps.ocp.acca
+10.1.18.237 dovepay-etrip-server.epay-test.apps.ocp.acca
+10.1.18.237 jenkins.epay-test.apps.ocp.acca
+
+
+10.1.82.200 console-openshift-console.apps.ocp.epay
+10.1.82.200 oauth-openshift.apps.ocp.epay
+10.1.82.200 grafana-istio-system.apps.ocp.epay
+10.1.82.200 istio-ingressgateway-istio-system.apps.ocp.epay
+10.1.82.200 jaeger-istio-system.apps.ocp.epay
+10.1.82.200 kiali-istio-system.apps.ocp.epay
+10.1.82.200 prometheus-istio-system.apps.ocp.epay
+10.1.82.200 kibana-openshift-logging.apps.ocp.epay
+10.1.82.200 grafana-openshift-monitoring.apps.ocp.epay
+10.1.82.200 prometheus-k8s-openshift-monitoring.apps.ocp.epay
+10.1.82.200 alertmanager-main-openshift-monitoring.apps.ocp.epay
+10.1.82.200 default-route-openshift-image-registry.apps.ocp.epay
+
+10.1.82.200 dovepay-etrip-server.epay-test.apps.ocp.epay
+10.1.82.200 dovemgr-dovemgr.apps.ocp.epay
+10.1.82.200 test-server-a.dovepay-test.apps.ocp.epay
+10.1.82.200 jenkins-pipeline-test.apps.ocp.epay
+10.1.82.200 jenkins.dovepay-jenkins.apps.ocp.epay
+10.1.82.200 jenkins-dovepay-test.apps.ocp.epay
+10.1.18.200 jenkins.epay-test.apps.ocp.epay
+10.1.82.200 dovepay-etrip-server.dovepay-etrip.apps.ocp.epay
+10.1.82.200 dovepay-etrip-quartz.dovepay-etrip.apps.ocp.epay
+10.1.82.200 dovepay-etrip-settlement-quartz.dovepay-etrip.apps.ocp.epay
+10.1.82.200 dovemgrocp.dovepay-pay-core.apps.ocp.epay
+10.1.82.200 dovepayocp.dovepay-pay-core.apps.ocp.epay
+10.1.82.200 dovepay.dovepay-pay-core.apps.ocp.epay
+10.1.82.200 dovepay-thirdpay.dovepay-pay-core.apps.ocp.epay
+10.1.82.200 dovepaysafeguard.dovepay-pay-core.apps.ocp.epay
+10.1.82.200 virpay.virpay.apps.ocp.epay
+10.1.82.200 virpayplat.virpays.apps.ocp.epay
+10.1.82.200 virpaytrans.virpays.apps.ocp.epay
+10.1.82.200 dovepay-riskcontrol-dovehandler.dovepay-pay-core.apps.ocp.epay
+10.1.82.200 dovepay-cardpay-virtualcard.dovepay-cardpay.apps.ocp.epay
+
+10.1.85.200 api.ocptest.epay
+10.1.85.200 api-int.ocptest.epay
+10.1.85.200 oauth-openshift.apps.ocptest.epay
+10.1.85.200 console-openshift-console.apps.ocptest.epay
+10.1.85.200 grafana-openshift-monitoring.apps.ocptest.epay
+10.1.85.200 kibana-openshift-logging.apps.ocptest.epay
+10.1.85.200 alertmanager-main-openshift-monitoring.apps.ocptest.epay
+10.1.85.200 default-route-openshift-image-registry.apps.ocptest.epay
+
+10.1.85.200 dovemgr.yakedevops.apps.ocptest.epay
+10.1.85.200 dovepay-thirdpay.yakedevops.apps.ocptest.epay
+10.1.85.200 dovepay-etrip-server.yakedevops.apps.ocptest.epay
+10.1.85.200 dovemgr.dovepay-dev.apps.ocptest.epay
+10.1.85.200 virpay.virpays.apps.ocptest.epay
+10.1.85.200 virpayplat.virpays.apps.ocptest.epay
+10.1.85.200 virpaytrans.virpays.apps.ocptest.epay
+10.1.85.200 vams.dovepay-dev.apps.ocptest.epay
+10.1.85.200 virtualaccount.dovepay-dev.apps.ocptest.epay
+10.1.85.200 virtualaccountmgr.dovepay-dev.apps.ocptest.epay
+10.1.85.200 nacos-proxy-dovepay-nacos.apps.ocptest.epay
+
+10.1.85.237 gitlab-trigger.dovepay-cicd.epay.k8s1.test
+10.1.85.237 app.dovepay-dev.epay.k8s1.test
+10.1.85.237 gitsubpath-trigger.dovepay-cicd.epay.k8s1.test
+10.1.85.237 svn-trigger.dovepay-cicd.epay.k8s1.test
+10.1.85.231 nacos.dovepay-nacos.epay.k8s1.test
+
+10.1.85.231 dovepay-cicd-trigger-quarkus.dovepay-serverless.example.com
+
+10.1.85.89 api.crc.testing oauth-openshift.apps-crc.testing console-openshift-console.apps-crc.testing default-route-openshift-image-registry.apps-crc.testing
+10.1.85.89 django-ex-git-dovepay-dev.apps-crc.testing
+10.1.85.89 dovemgr-dovepay-dev.apps-crc.testing
+
+10.1.82.143 app.dovepay-prod.epay.k8sbackup.prod
+
+10.1.82.225 api.ocp.dovepay
+10.1.82.225 api-int.ocp.dovepay
+10.1.82.225 oauth-openshift.apps.ocp.dovepay
+10.1.82.225 console-openshift-console.apps.ocp.dovepay
+10.1.82.225 grafana-openshift-monitoring.apps.ocp.dovepay
+10.1.82.225 kibana-openshift-logging.apps.ocp.dovepay
+10.1.82.225 alertmanager-main-openshift-monitoring.apps.ocp.dovepay
+10.1.82.200 dovepay-etrip-server.epay-test.apps.ocp.dovepay
+10.1.51.74 windows10.microdone.cn

@@ -1,5 +1,5 @@
-exports.dataServer = 'http://localhost:8080'
-exports.nodeServer = 'http://localhost:3000'
+exports.dataServer = 'http://lyu.dp.com:8080'
+exports.nodeServer = 'http://lyu.dp.com:3000'
 exports.redisCluster = {
   rootNodes: 
     process.env.NODE_ENV === 'development'? 
