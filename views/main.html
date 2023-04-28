@@ -11,17 +11,18 @@
   </header>
   <main>
     <div class="uk-container">
-      <table class="uk-table uk-table-divider">
+      <table class="uk-table uk-table-divider" id="articleListTable">
         <caption class="uk-margin-top uk-margin-bottom">
           <a class="uk-button uk-button-primary" href="/dove-eee/main/new">新建</a>
         </caption>
         <thead>
           <tr>
-            <th>文章标题</th>
-            <th>作者</th>
-            <th>编辑者</th>
-            <th>创建时间</th>
-            <th>上传时间</th>
+            <th data-prop="id" hidden>ID</th>
+            <th data-prop="title">文章标题</th>
+            <th data-prop="author">作者</th>
+            <th data-prop="editor">编辑者</th>
+            <th data-prop="timeCreate">创建时间</th>
+            <th data-prop="timeModify">修改时间</th>
             <th>操作</th>
           </tr>
         </thead>

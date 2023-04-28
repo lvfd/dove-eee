@@ -27,11 +27,9 @@ window.addEventListener('load', () => {
 
 function submitNewArticle() {
   axios.put(`${dataServer}/dove-eee-data/article`, getPostData(), { withCredentials: true })
-  .then(response => {
-    console.log(response)
+  .then(() => {
     return UIkit.modal.alert('添加成功')
-  })
-  .catch(error => {
+  }, error => {
     try {
       if (error.response.status === 406) {
         if (error.response.data.msg === 'error') {
@@ -53,6 +51,11 @@ function submitNewArticle() {
       console.error(error)
       return UIkit.modal.alert('远程服务处理失败：其他异常')
     }
+  })
+  .then(() => window.location.replace('/dove-eee/main'))
+  .catch(error => {
+    console.error('其他异常', error)
+    UIkit.modal.alert('其他异常')
   })
 }
 

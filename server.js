@@ -117,7 +117,10 @@ app.get(`/${appname}/main/new`, isAuthenticated, (req, res) => {
   res.render('new', { username: req.session.username })
 })
 
-app.get(`/${appname}/edit`, isAuthenticated, (req, res) => res.render('edit'))
+/* Edit article Page: */
+app.get(`/${appname}/edit`, isAuthenticated, (req, res) => {
+  res.render('edit', { username: req.session.username })
+})
 
 app.post(`/${appname}/images/upload`, upload.single('file'), (req, res) => {
   const image = req.file
