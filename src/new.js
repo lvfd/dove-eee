@@ -1,29 +1,14 @@
 import UIkit from 'uikit'
 import Icons from 'uikit/dist/js/uikit-icons'
 import './init-page'
+import './init-tinymce'
 import { dataServer } from '../project.config'
 import axios from 'axios'
+import submitNewArticleListener from './submit-listener'
 UIkit.use(Icons)
 const dangerClass = 'uk-form-danger'
-tinymce.init({
-  selector: 'textarea#content',
-  language: 'zh-Hans',
-  placeholder: '你可以添加文本，图片，表格，超链接',
-  plugins: ['image', 'link', 'preview', 'table', 'lists'],
-  toolbar: 'undo redo | bold italic alignleft aligncenter alignright alignjustify | link image table numlist bullist | preview',
-  a11y_advanced_options: true,
-  images_upload_url: '/dove-eee/images/upload',
-})
 
-window.addEventListener('load', () => {
-  try {
-    document.querySelector('#submitNewArticle').addEventListener('click', submitNewArticle)
-    document.querySelectorAll('.uk-input').forEach(input => input.addEventListener('focus', e => e.target.classList.remove(dangerClass)))
-  } catch (e) {
-    console.error(e, e.stack)
-    UIkit.modal.alert('页面初始化错误')
-  }
-})
+submitNewArticleListener(submitNewArticle)
 
 function submitNewArticle() {
   axios.put(`${dataServer}/dove-eee-data/article`, getPostData(), { withCredentials: true })

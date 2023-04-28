@@ -1,41 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main</title>
-  <link rel="stylesheet" href="/dove-eee/libs/uikit/css/uikit.min.css">
+  <%- include('head.html') %>
+  <title>修改文章</title>
   <script src="/dove-eee/libs/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
   <script src="/dove-eee/release/edit.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
-  <script>
-    tinymce.init({
-      selector: 'textarea#writeHere',
-      language: 'zh-Hans',
-      placeholder: '你可以输入文本，图片，表格，超链接',
-      plugins: ['image', 'link', 'preview', 'table', 'lists'],
-      toolbar: 'undo redo | bold italic alignleft aligncenter alignright alignjustify | link image table numlist bullist | preview',
-      a11y_advanced_options: true,
-      images_upload_url: '/dove-eee/images/upload',
-    });
-    window.addEventListener('load', () => {
-      document.getElementById('submitHTML').addEventListener('click', () => {
-        const postData = {
-          title: '文章标题',
-          id: '1',
-          modTime: Date.now()
-        }
-        console.log(tinymce.get('writeHere').getContent())
-      })
-    })
-  </script>
 </head>
 <body>
+  <header>
+    <%- include('edit-header.html', { headerTitle: '修改文章' }) %>
+  </header>
   <main>
-    <label for="title">标题</label>
-    <input type="text" name="title">
-    <textarea id="writeHere"></textarea>
-    <button type="button" id="submitHTML">提交</button>
+    <input type="hidden" id="articleId" value="<%= articleId %>">
+    <%- include('edit-main.html') %>
   </main>
+  <footer>
+    <div class="uk-section uk-section-secondary uk-section-xsmall uk-text-center">
+      <span>lvfd@acca.com.cn</span>
+    </div>
+  </footer>
 </body>
 </html>

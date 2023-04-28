@@ -1,0 +1,23 @@
+<div class="uk-container">
+  <form>
+    <fieldset class="uk-fieldset">
+      <div class="uk-margin uk-margin-top">
+        <label class="uk-form-label">标题</label>
+        <input type="text" id="title" class="uk-input">
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label">作者</label>
+        <input type="text" id="author" class="uk-input">
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label">内容</label>
+        <textarea class="uk-textarea" id="content"></textarea>
+      </div>
+      <div class="uk-margin" hidden>
+        <label class="uk-form-label">编辑者</label>
+        <input type="hidden" id="editor" value="<%= username %>">
+      </div>
+      <button type="button" class="uk-button uk-button-primary uk-width-medium uk-align-center" id="submitNewArticle">提交</button>
+    </fieldset>
+  </form>
+</div>
