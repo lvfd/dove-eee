@@ -11,8 +11,9 @@
   </header>
   <main>
     <div class="uk-container">
+      <input type="hidden" id="userName" value="<%= username %>">
       <table class="uk-table uk-table-divider" id="articleListTable">
-        <caption class="uk-margin-top uk-margin-bottom">
+        <caption class="uk-margin">
           <a class="uk-button uk-button-primary" href="/dove-eee/main/new">新建</a>
         </caption>
         <thead>
@@ -23,11 +24,12 @@
             <th data-prop="editor">编辑者</th>
             <th data-prop="timeCreate">创建时间</th>
             <th data-prop="timeModify">修改时间</th>
+            <th data-prop="version">版本</th>
             <th data-prop="hidden">显示状态</th>
             <th>操作</th>
           </tr>
         </thead>
-        <tbody></tbody>  
+        <tbody></tbody>
       </table>
     </div>
   </main>

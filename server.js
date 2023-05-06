@@ -81,6 +81,11 @@ app.post(`/${appname}/login`, bodyParser.json(), (req, res, next) => {
       return req.session.regenerate(err => {
         if (err) next(err)
         req.session.username = username
+        req.session.articleListStatus = {
+          orderBy: 'time_modify desc',
+          pageNum: 1,
+          pageSize: 10
+        }
         req.session.save(err => {
           if (err) return next(err)
           res.status(201).json({ msg: '验证通过' })
@@ -98,6 +103,7 @@ app.post(`/${appname}/login`, bodyParser.json(), (req, res, next) => {
 /* Logout: */
 app.get(`/${appname}/logout`, (req, res, next) => {
   req.session.username = null
+  req.session.articleListStatus = null
   req.session.save(err => {
     if (err) next(err)
     req.session.regenerate(err => {
@@ -105,6 +111,18 @@ app.get(`/${appname}/logout`, (req, res, next) => {
       res.redirect(`/${appname}`)
     })
   })
+})
+
+/* Get ArticleList Status: */
+app.get(`/${appname}/articleListStatus`, isAuthenticated, (req, res) => {
+  res.json(req.session.articleListStatus)
+})
+
+/* Set ArticleList Status: */
+app.put(`/${appname}/articleListStatus`, isAuthenticated, bodyParser.json(), (req, res) => {
+  for (let prop in req.body)
+    req.session.articleListStatus[prop] = req.body[prop]
+  res.json(req.session.articleListStatus)
 })
 
 /* Main Page: */
