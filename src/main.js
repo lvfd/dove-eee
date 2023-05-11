@@ -34,24 +34,28 @@ function getArticleList() {
         articleProperties.forEach(property => {
           const td = document.createElement('td')
           tr.appendChild(td)
-          if (/time/.test(property)) td.innerText = new Date(article[property]).toLocaleString()
-          else if (property === 'hidden' && article[property] === 0) {
-            const iconEye = document.createElement('a')
-            iconEye.setAttribute('uk-icon', 'icon: eye')
-            iconEye.setAttribute('uk-tooltip', '文章可见')
-            iconEye.classList.add('uk-text-success')
-            td.appendChild(iconEye)
-            iconEye.addEventListener('click', patchArticle(article['id'], { hidden: 1 }))
+          if (/time/.test(property)) {
+            td.innerText = new Date(article[property]).toLocaleString()
           }
-          else if (property === 'hidden' && article[property] === 1) {
-            const iconEye = document.createElement('a')
-            iconEye.setAttribute('uk-icon', 'icon: eye-slash')
-            iconEye.setAttribute('uk-tooltip', '文章不可见')
-            iconEye.classList.add('uk-text-muted')
-            td.appendChild(iconEye)
-            iconEye.addEventListener('click', patchArticle(article['id'], { hidden: 0 }))
+          else if (property === 'title' && !(article['top'] === 0)) {
+            td.innerHTML = 
+            `<span class="uk-label uk-margin-small-right">置顶</span>${article[property]}`
+            tr.classList.add('uk-background-muted')
           }
-          else td.innerText = article[property]
+          else if (property === 'hidden') {
+            const isShow = article[property] === 0
+            const iconEye = document.createElement('a')
+            td.appendChild(iconEye)
+            iconEye.setAttribute('uk-icon', isShow? 'icon: eye': 'icon: eye-slash')
+            iconEye.setAttribute('uk-tooltip', isShow? '文章可见': '文章不可见')
+            iconEye.classList.add(isShow? 'uk-text-success': 'uk-text-muted')
+            iconEye.addEventListener('click', patchArticle(article['id'], { hidden: isShow? 1: 0 }))
+            if (!isShow) 
+              tr.classList.add('uk-text-muted', 'uk-text-lighter')
+          }
+          else {
+            td.innerText = article[property]
+          }
           if (property === 'id') {
             td.setAttribute('data-prop', 'id')
             td.setAttribute('hidden', '')
@@ -113,17 +117,22 @@ function buildActionTd(tr, article) {
   const link_modify = document.createElement('a')
   const link_delete = document.createElement('a')
   const link_copy = document.createElement('a')
-  actionTd.appendChild(link_modify)
-  actionTd.appendChild(link_copy)
-  actionTd.appendChild(link_delete)
-  link_modify.title = '修改'
-  link_delete.title = '删除'
-  link_copy.title = '复制'
+  const link_top = document.createElement('a')
+  const btnOrder = [link_modify, link_copy, link_top, link_delete]
+  btnOrder.forEach(btn => actionTd.appendChild(btn))
+  btnOrder.forEach((btn, index) => {
+    if (index < btnOrder.length -1) 
+      btn.classList.add('uk-margin-small-right')
+  })
+  link_modify.setAttribute('uk-tooltip', '修改')
+  link_delete.setAttribute('uk-tooltip', '删除')
+  link_copy.setAttribute('uk-tooltip', '复制')
+  link_top.setAttribute('uk-tooltip', article['top'] === 0? '置顶': '解除置顶')
   link_modify.setAttribute('uk-icon', 'icon: file-edit')
   link_delete.setAttribute('uk-icon', 'icon: trash')
   link_copy.setAttribute('uk-icon', 'icon: copy')
-  link_modify.classList.add('uk-margin-small-right')
-  link_copy.classList.add('uk-margin-small-right')
+  link_top.setAttribute('uk-icon', article['top'] === 0? 'icon: upload': 'icon: download')
+  if (!(article['top'] === 0)) link_top.classList.add('uk-text-primary')
   link_modify.href = `/dove-eee/edit/${article['id']}`
   link_delete.addEventListener('click', function(event) {
     event.preventDefault()
@@ -163,6 +172,10 @@ function buildActionTd(tr, article) {
       console.error('复制失败' ,error)
       UIkit.notification('复制记录失败', {status:'danger'})
     })
+  })
+  link_top.addEventListener('click', function() {
+    return UIkit.modal.confirm(`是否将文章${article['top'] === 0? '': '解除'}置顶`)
+    .then(() => patchArticle(article['id'], { top: article['top'] === 0? 1: 0 })(), () => {})
   })
 }
 function buildPagination(response) {

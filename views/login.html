@@ -3,9 +3,13 @@
 <head>
   <%- include('head.html') -%>
   <title>德文修登录页</title>
+  <script src="/dove-eee/libs/password/crypto-js.js"></script>
+  <% if (env === 'gm') { %><script src="/dove-eee/libs/password/PassGuardCtrl_GM.js"></script>
+  <% } else { %><script src="/dove-eee/libs/password/PassGuardCtrl.js"></script><% } %>
   <script src="/dove-eee/release/login.js"></script>
 </head>
 <body>
+  <input type="hidden" id="passGuardEnv" value="<%= env %>">
   <main class="uk-background-muted">
     <div class="uk-position-center">
       <form>
@@ -23,9 +27,15 @@
                 <label class="uk-form-label" for="password">密码</label>
                 <input class="uk-input" type="password" id="password" name="password" placeholder="请输入密码" autocomplete="off">
               </div>
+              <div class="uk-margin">
+                <label class="uk-form-label" for="password">密码控件测试</label>
+                <span id="_ocx_password_str"></span>
+                <input type="hidden" name="password">
+              </div>
             </div>
             <div class="uk-card-footer">
               <button class="uk-button uk-button-primary uk-align-center" id="loginBtn" type="button">进入</button>
+              <button class="uk-button uk-button-primary uk-align-center" id="loginBtnWithPassGuard" type="button">进入(密码控件)</button>
             </div>
           </div>
         </fieldset>

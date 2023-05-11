@@ -44,12 +44,14 @@ function writeOriginalValues() {
           submitData.title = title.value.trim()
         if (author.value.trim() !== response.author)
           submitData.author = author.value.trim()
+        if (version.value.trim() !== response.version)
+          submitData.version = version.value.trim()
         if (tinymce.get('content').getContent().trim() !== response.content)
           submitData.content = tinymce.get('content').getContent().trim()
         if (Object.keys(submitData).length === 0)
           return UIkit.modal.alert('您没有修改任何内容')
         submitData.timeModify = true
-        console.log(submitData)
+        // console.log(submitData)
         axios.patch(`${dataServer}/dove-eee-data/article`, submitData, { 
           withCredentials: true,
           params: {id: articleId}

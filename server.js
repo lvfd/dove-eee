@@ -12,6 +12,7 @@ const axios = require('axios')
 const app = express()
 const port = 3000
 const env = process.env.NODE_ENV? process.env.NODE_ENV: 'production'
+const passGuardEnv = process.env.PASSGUARD_ENV? process.env.PASSGUARD_ENV: 'gm'
 const appname = 'dove-eee'
 const dirname = __dirname
 const storage = multer.diskStorage({
@@ -66,7 +67,7 @@ function isAuthenticated (req, res, next) {
 }
 
 /* Login Page: */
-app.get(`/${appname}`, (req, res) => res.render('login'))
+app.get(`/${appname}`, (req, res) => res.render('login', { env: passGuardEnv }))
 
 /* Login Post: */
 app.post(`/${appname}/login`, bodyParser.json(), (req, res, next) => {
@@ -82,7 +83,7 @@ app.post(`/${appname}/login`, bodyParser.json(), (req, res, next) => {
         if (err) next(err)
         req.session.username = username
         req.session.articleListStatus = {
-          orderBy: 'time_modify desc',
+          orderBy: 'time_top desc nulls last, time_modify desc',
           pageNum: 1,
           pageSize: 10
         }
@@ -149,6 +150,11 @@ app.post(`/${appname}/images/upload`, upload.single('file'), (req, res) => {
     msg: 'success',
     location: `/${appname}/uploads/${image.filename}`
   })
+})
+
+/* Displayed in dovepay: */
+app.get(`/${appname}/dovepay/notification`, (req, res) => {
+  res.render('dovepay/notificationCenter')
 })
 
 app.listen(port, () => console.log(`eee is running in port: ${port}, env = ${env}`))

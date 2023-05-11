@@ -10,7 +10,8 @@ module.exports = {
     login: './src/login.js',
     main: './src/main.js',
     edit: './src/edit.js',
-    new: './src/new.js'
+    new: './src/new.js',
+    // 'dovepay-notificationCenter': './dovepay-notificationCenter'
   },
   output: {
     // clean: true,
@@ -30,6 +31,9 @@ module.exports = {
   //     },{
   //       from: path.resolve(__dirname, 'node_modules/uikit/dist/css'),
   //       to: path.resolve(__dirname, 'libs/uikit/css')
+  //     },{
+  //       from: path.resolve(__dirname, 'src/password/libs'),
+  //       to: path.resolve(__dirname, 'libs/password')
   //     }]
   //   })
   // ]
