@@ -1,4 +1,11 @@
 <meta charset="utf-8">
+<script src="/dove-eee/libs/preload/ie.js"></script>
+<script type="text/javascript">
+  if (IEVersion() !== -1) {
+    document.write('<h1 style="text-align: center">暂不支持IE, 请更换Edge、 Chrome等浏览器继续使用</h1>');
+    document.execCommand("Stop");
+  }
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="origin">
 <link rel="icon" type="image/x-icon" href="/dove-eee/libs/favicon.ico">

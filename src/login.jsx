@@ -3,11 +3,14 @@ import Icons from 'uikit/dist/js/uikit-icons'
 import axios from 'axios'
 import { dataServer } from '../project.config'
 import initPasswordPlugin from './password/init'
+import { createRoot } from 'react-dom/client'
+import { Button } from './react/Components'
 
 UIkit.use(Icons)
 const dangerClass = 'uk-form-danger'
 const successClass = 'uk-form-success'
 window.addEventListener('DOMContentLoaded', () => {
+  reactRender()
   const inputsForSubmit = document.querySelectorAll('.uk-card-body input')
   const buttonForLogin = document.querySelector('#loginBtn')
   const buttonForLoginWithPassGuard = document.querySelector('#loginBtnWithPassGuard')
@@ -74,7 +77,6 @@ async function loginFunction() {
     }
   })
 }
-
 function loginFunctionWithPassGuard(passGuardEnv) {
   return async function() {
     try {
@@ -94,4 +96,9 @@ function loginFunctionWithPassGuard(passGuardEnv) {
       UIkit.modal.alert('登录程序异常')
     }
   }
+}
+function reactRender() {
+  const buttonNode = document.getElementById('buttonDomNode')
+  const buttonRoot = createRoot(buttonNode)
+  buttonRoot.render(<Button />)
 }
